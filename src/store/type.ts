@@ -7,4 +7,16 @@ interface AuthType {
   updateUserId: (data: string | undefined | null) => void;
 }
 
-type StoreState = AuthType;
+interface LangType {
+  lang: string;
+  updateLang: (data: string) => void;
+}
+
+interface CartType {
+  cartItem: CartDataType[];
+  addCartItem: (product: CartDataType) => void;
+  deleteEachCartItem: (itemCode: string) => void;
+  deleteAllCartItem: () => void;
+}
+
+type StoreState = AuthType & LangType & CartType;

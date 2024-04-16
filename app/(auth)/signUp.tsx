@@ -1,39 +1,59 @@
-import { View, Text, Alert } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "expo-router";
 import { signUpWithEmail } from "@/domain/auth/sign_up_with_email";
 import { useStore } from "@/src/store/store";
+import SignUpScreen from "@/src/screens/auth/signUp/SignUpScreen";
 
-const register = () => {
+const signUp = () => {
   const router = useRouter();
 
   const { updateUserId } = useStore();
+  const [loading, setLoading] = useState(false);
+  const [errVisible, setErrVisible] = useState({ status: false, message: "" });
 
-  const signUpAction = async () => {
-    const { data, error } = await signUpWithEmail(
-      "htoomyat@gmail.com",
-      "000000"
-    );
+  const goSignInAction = () => {
+    router.push("/signIn");
+  };
 
-    if (error) {
-      Alert.alert(error.name, `${(error.message, error.code, error.name)}`);
+  const signInWithGoogleAction = () => {};
+
+  const signUpAction = async (formData: {
+    email: string;
+    password: string;
+    confirmPassword: string;
+  }) => {
+    if (formData.password !== formData.confirmPassword) {
+      setErrVisible({ status: true, message: "Passwords do not match" });
       return;
     }
 
-    console.log("singUpdata >>>", data.user?.id);
+    setLoading(true);
+    const { data, error } = await signUpWithEmail(
+      formData.email,
+      formData.password
+    );
+
+    if (error) {
+      setErrVisible({ status: true, message: error.message });
+      setLoading(false);
+      return;
+    }
+
+    setLoading(false);
     updateUserId(data?.user?.id);
     router.replace("/(tabs)");
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text onPress={signUpAction} style={{ marginBottom: 50 }}>
-        Sign Up Button
-      </Text>
-
-      <Text onPress={() => router.push("/signIn")}>Go Sign In</Text>
-    </View>
+    <SignUpScreen
+      goSignInAction={goSignInAction}
+      signUpAction={signUpAction}
+      signInWithGoogleAction={signInWithGoogleAction}
+      loading={loading}
+      errVisible={errVisible}
+      hideModal={() => setErrVisible({ status: false, message: "" })}
+    />
   );
 };
 
-export default register;
+export default signUp;

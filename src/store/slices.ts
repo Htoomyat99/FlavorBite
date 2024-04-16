@@ -12,3 +12,39 @@ export const createAuthSlice = (set: any): AuthType => ({
     set(() => ({ userId: data }));
   },
 });
+
+export const createLangSlice = (set: any): LangType => ({
+  lang: "en",
+  updateLang: (data) => {
+    set(() => ({ lang: data }));
+  },
+});
+
+export const createCartSlice = (set: any): CartType => ({
+  cartItem: [],
+  addCartItem: (product) => {
+    set((state: any) => {
+      let index = state.cartItem.findIndex(
+        (item: CartDataType) => item.item_code === product.item_code
+      );
+
+      if (index !== -1) {
+        state.cartItem[index].item_qty = product.item_qty;
+      } else {
+        state.cartItem.push(product);
+      }
+    });
+  },
+  deleteEachCartItem: (itemCode) => {
+    set((state: any) => {
+      state.cartItem.filter(
+        (item: CartDataType) => item.item_code !== itemCode
+      );
+    });
+  },
+  deleteAllCartItem: () => {
+    set((state: any) => {
+      state.cartItem = [];
+    });
+  },
+});

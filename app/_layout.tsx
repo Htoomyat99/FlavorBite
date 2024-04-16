@@ -1,18 +1,64 @@
-import { View, Text } from "react-native";
-import React from "react";
-import { Stack } from "expo-router";
+import React, { useEffect } from "react";
+import { Stack, useRouter } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { PaperProvider } from "react-native-paper";
+import { PaperProvider, MD3DarkTheme, MD3LightTheme } from "react-native-paper";
+import { Alert, useColorScheme } from "react-native";
+import { Colors } from "@/constants/Colors";
+import { getCurrentSession } from "@/domain/auth/get_current_session";
+import { useStore } from "@/src/store/store";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 const _layout = () => {
+  const colorTheme = useColorScheme();
+  const router = useRouter();
+
+  const { updateUserId } = useStore();
+
+  useEffect(() => {
+    currentSession();
+  }, []);
+
+  const currentSession = async () => {
+    router.replace("/splash");
+
+    const { data, error } = await getCurrentSession();
+
+    if (error) {
+      Alert.alert(error.name, error.message);
+      router.replace("/signIn");
+      return;
+    }
+
+    if (data.session === null) {
+      router.replace("/signIn");
+      return;
+    }
+
+    router.replace("/(tabs)/home");
+    updateUserId(data.session.user.id);
+  };
+
+  const DarkTheme = {
+    ...MD3DarkTheme,
+    Colors: Colors.light,
+  };
+
+  const LightTheme = {
+    ...MD3LightTheme,
+    Colors: Colors.dark,
+  };
+
+  const theme = colorTheme === "dark" ? DarkTheme : LightTheme;
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <PaperProvider>
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="index" />
-          <Stack.Screen name="(auth)" />
-          <Stack.Screen name="(tabs)" />
-        </Stack>
+      <PaperProvider theme={theme}>
+        <BottomSheetModalProvider>
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="(auth)" />
+            <Stack.Screen name="(tabs)" />
+          </Stack>
+        </BottomSheetModalProvider>
       </PaperProvider>
     </GestureHandlerRootView>
   );
