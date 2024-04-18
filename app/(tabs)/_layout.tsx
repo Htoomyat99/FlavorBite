@@ -12,7 +12,7 @@ const _layout = () => {
   const locale = useLocale();
 
   const segment: string[] = useSegments();
-  const hide = segment.includes("[id]");
+  const hide = segment.includes("cart") || segment.includes("orderDetail");
 
   return (
     <Tabs

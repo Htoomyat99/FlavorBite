@@ -1,6 +1,6 @@
 interface AuthType {
-  userData: UserType | null;
-  updateUserData: (data: UserType | null) => void;
+  userData: UserType;
+  updateUserData: (data: UserType) => void;
   onboarding: boolean;
   updateOnboarding: (data: boolean) => void;
   userId: string | null;

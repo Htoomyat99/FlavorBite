@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     paddingTop: hp(1),
     paddingBottom: hp(2),
     borderWidth: wp(0.6),
+    elevation: 1,
   },
   image: {
     width: wp(25),

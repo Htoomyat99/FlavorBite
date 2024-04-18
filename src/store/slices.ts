@@ -3,7 +3,7 @@ export const createAuthSlice = (set: any): AuthType => ({
   updateOnboarding: (data) => {
     set(() => ({ onboarding: data }));
   },
-  userData: null,
+  userData: {} as UserType,
   updateUserData: (data) => {
     set(() => ({ userData: data }));
   },
@@ -30,6 +30,7 @@ export const createCartSlice = (set: any): CartType => ({
 
       if (index !== -1) {
         state.cartItem[index].item_qty = product.item_qty;
+        state.cartItem[index].item_amount = product.item_amount;
       } else {
         state.cartItem.push(product);
       }
@@ -37,7 +38,7 @@ export const createCartSlice = (set: any): CartType => ({
   },
   deleteEachCartItem: (itemCode) => {
     set((state: any) => {
-      state.cartItem.filter(
+      state.cartItem = state.cartItem.filter(
         (item: CartDataType) => item.item_code !== itemCode
       );
     });

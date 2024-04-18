@@ -35,6 +35,33 @@ export default {
   currency: "Ks",
   addCart: "Add Cart",
 
+  //cart
+  cart: "Cart",
+  remove: "Remove",
+  noCartItemFound: "No item in the Cart, go Shopping!",
+  subTotal: "SubTotal",
+  deliveryFee: "Delivery Fee",
+  netAmount: "Net Amount",
+  orderNow: "Order Now",
+  orderSuccess: "Order Success",
+
+  //order
+  orderEmpty: "Order is Empty",
+  amount: "Amount",
+  deliveryStatus: "Delivery Status",
+  delivered: "Delivered",
+  pending: "Pending",
+  complete: "Complete",
+
+  //orderDetail
+  orderDetail: "Order Detail",
+  qty: "Qty",
+  orderItem: "Order item",
+  orderInfo: "Order Info",
+  orderId: "Order ID",
+  grandTotal: "Grand Total",
+  orderTotal: "Order Total",
+
   //errorModal
   error: "Error",
   gotIt: "Got it",

@@ -1,6 +1,6 @@
-import { View, Text, TouchableOpacity, Keyboard } from "react-native";
-import React, { useState } from "react";
-import { Appbar, Badge, Icon, Searchbar } from "react-native-paper";
+import { View, TouchableOpacity, Keyboard } from "react-native";
+import React from "react";
+import { Badge, Icon, Searchbar } from "react-native-paper";
 import styles from "./style";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import { useLocale } from "@/src/hooks/useLocale";

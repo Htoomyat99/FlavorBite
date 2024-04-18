@@ -28,12 +28,11 @@ const login = () => {
 
     if (error) {
       setErrVisible({ status: true, message: error.message });
-
       setLoading(false);
       return;
     }
 
-    router.replace("/(tabs)");
+    router.replace("/(tabs)/home");
     updateUserId(data?.user.id);
     setLoading(false);
   };

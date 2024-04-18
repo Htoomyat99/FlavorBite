@@ -41,7 +41,7 @@ const signUp = () => {
 
     setLoading(false);
     updateUserId(data?.user?.id);
-    router.replace("/(tabs)");
+    router.replace("/(tabs)/home");
   };
 
   return (

@@ -1,7 +1,7 @@
 import { supabase } from "./supabase";
 
 interface newDataType {
-  [key: string]: string | number | null;
+  [key: string]: string | number | boolean | null;
 }
 
 export const emailSignUp = async (email: string, password: string) => {
@@ -93,6 +93,28 @@ export const insertData = async (tableName: string, newData: newDataType) => {
   };
 };
 
+export const insertManyData = async (
+  tableName: string,
+  newData: newDataType[]
+) => {
+  const { data, error } = await supabase
+    .from(tableName)
+    .insert(newData)
+    .select();
+
+  if (error) {
+    return {
+      error: error,
+      data: data,
+    };
+  }
+
+  return {
+    data: data,
+    error: error,
+  };
+};
+
 export const updateData = async (
   tableName: string,
   newData: newDataType,
@@ -124,6 +146,69 @@ export const getAllData = async (tableName: string) => {
     return {
       data: data,
       error: error,
+    };
+  }
+
+  return {
+    data: data,
+    error: error,
+  };
+};
+
+export const insertDataAndDataDetail = async (
+  orderData: newDataType,
+  orderDetailData: newDataType[]
+) => {
+  const { data: order, error: orderError } = await supabase
+    .from("order")
+    .insert(orderData)
+    .select("id")
+    .single();
+
+  if (orderError) {
+    return {
+      data: order,
+      error: orderError,
+    };
+  }
+
+  const { data: orderDetail, error: orderDetailError } = await supabase
+    .from("order_detail")
+    .insert(
+      orderDetailData.map((item) => ({
+        ...item,
+        order_id: order?.id,
+      }))
+    )
+    .select();
+
+  if (orderDetailError) {
+    return {
+      error: orderDetailError,
+      data: orderDetail,
+    };
+  }
+
+  return {
+    data: orderDetail,
+    error: orderDetailError,
+  };
+};
+
+export const getAllDataByFilter = async (
+  tableName: string,
+  colName: string,
+  colValue: string | number
+) => {
+  const { data, error } = await supabase
+    .from(tableName)
+    .select()
+    .eq(colName, colValue);
+
+  if (error) {
+    return {
+      error: error,
+      data: data,
     };
   }
 
