@@ -15,7 +15,6 @@ import { getSaleItems } from "@/domain/dashboard/get_sale_items";
 import { useStore } from "@/src/store/store";
 import { useLocale } from "@/src/hooks/useLocale";
 import AnimatedLottieView from "lottie-react-native";
-import LoadingView from "@/src/components/LoadingView";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import EmptyProduct from "./EmptyProduct";
 

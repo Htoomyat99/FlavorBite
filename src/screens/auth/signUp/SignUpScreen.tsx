@@ -7,8 +7,8 @@ import { useForm } from "react-hook-form";
 import { useLocale } from "@/src/hooks/useLocale";
 import { getSignUpFormArray } from "../AuthData";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
-import LoadingView from "@/src/components/LoadingView";
-import ErrorAlertModal from "@/src/components/ErrorAlertModal";
+import LoadingModal from "@/src/modal/LoadingModal";
+import ErrorAlertModal from "@/src/modal/ErrorAlertModal";
 
 interface Props {
   goSignInAction: () => void;
@@ -109,7 +109,7 @@ const SignUpScreen = (props: Props) => {
         errVisible={props.errVisible}
         hideModal={props.hideModal}
       />
-      {props.loading && <LoadingView />}
+      {props.loading && <LoadingModal />}
     </ScrollView>
   );
 };

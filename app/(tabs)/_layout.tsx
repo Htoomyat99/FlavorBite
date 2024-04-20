@@ -12,7 +12,12 @@ const _layout = () => {
   const locale = useLocale();
 
   const segment: string[] = useSegments();
-  const hide = segment.includes("cart") || segment.includes("orderDetail");
+  const hide =
+    segment.includes("cart") ||
+    segment.includes("orderDetail") ||
+    segment.includes("account") ||
+    segment.includes("about") ||
+    segment.includes("changePassword");
 
   return (
     <Tabs
@@ -61,10 +66,10 @@ const _layout = () => {
         }}
       />
       <Tabs.Screen
-        name="account"
+        name="profile"
         options={{
           headerShown: false,
-          title: locale.account,
+          title: locale.profile,
           tabBarActiveTintColor: theme.colors.primary,
           tabBarLabelStyle: {
             fontSize: hp(1.5),

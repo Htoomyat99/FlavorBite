@@ -4,7 +4,7 @@ interface UpdateDataType {
   [key: string]: string | number;
 }
 
-export const updateUserData = async (
+export const updateUserInfo = async (
   newData: UpdateDataType,
   userId: string | undefined | null
 ) => {

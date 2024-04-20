@@ -51,3 +51,21 @@ interface orderDetailDataType {
   item_qty: number;
   order_id: number;
 }
+
+interface ProfileType {
+  id: number;
+  name: string;
+  icon: string;
+}
+
+interface UserInfoType {
+  id: number;
+  label: string;
+  value: string;
+}
+
+interface passType {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}

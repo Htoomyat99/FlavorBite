@@ -6,8 +6,8 @@ import { FormBuilder } from "react-native-paper-form-builder";
 import { useForm } from "react-hook-form";
 import { useLocale } from "@/src/hooks/useLocale";
 import { getSignInFormArray } from "../AuthData";
-import LoadingView from "@/src/components/LoadingView";
-import ErrorAlertModal from "@/src/components/ErrorAlertModal";
+import LoadingModal from "@/src/modal/LoadingModal";
+import ErrorAlertModal from "@/src/modal/ErrorAlertModal";
 
 interface Props {
   goSignUpAction: () => void;
@@ -102,7 +102,7 @@ const SignInScreen = (props: Props) => {
         hideModal={props.hideModal}
       />
 
-      {props.loading && <LoadingView />}
+      {props.loading && <LoadingModal />}
     </ScrollView>
   );
 };

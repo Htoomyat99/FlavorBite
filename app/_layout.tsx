@@ -12,7 +12,7 @@ const _layout = () => {
   const colorTheme = useColorScheme();
   const router = useRouter();
 
-  const { updateUserId } = useStore();
+  const { updateUserId, isDarkMode } = useStore();
 
   useEffect(() => {
     currentSession();
@@ -48,7 +48,7 @@ const _layout = () => {
     Colors: Colors.dark,
   };
 
-  const theme = colorTheme === "dark" ? DarkTheme : LightTheme;
+  const theme = colorTheme === "dark" || isDarkMode ? DarkTheme : LightTheme;
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>

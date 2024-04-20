@@ -1,7 +1,12 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import { createAuthSlice, createCartSlice, createLangSlice } from "./slices";
+import {
+  createAuthSlice,
+  createCartSlice,
+  createDarkThemeSlice,
+  createLangSlice,
+} from "./slices";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const useStore = create<StoreState>()(
@@ -9,6 +14,7 @@ export const useStore = create<StoreState>()(
     immer((set) => ({
       ...createAuthSlice(set),
       ...createLangSlice(set),
+      ...createDarkThemeSlice(set),
       ...createCartSlice(set),
     })),
     {

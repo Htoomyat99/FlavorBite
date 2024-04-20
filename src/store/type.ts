@@ -12,6 +12,11 @@ interface LangType {
   updateLang: (data: string) => void;
 }
 
+interface DarkThemeType {
+  isDarkMode: boolean;
+  updateDarkMode: (data: boolean) => void;
+}
+
 interface CartType {
   cartItem: CartDataType[];
   addCartItem: (product: CartDataType) => void;
@@ -19,4 +24,4 @@ interface CartType {
   deleteAllCartItem: () => void;
 }
 
-type StoreState = AuthType & LangType & CartType;
+type StoreState = AuthType & LangType & DarkThemeType & CartType;

@@ -20,6 +20,13 @@ export const createLangSlice = (set: any): LangType => ({
   },
 });
 
+export const createDarkThemeSlice = (set: any): DarkThemeType => ({
+  isDarkMode: false,
+  updateDarkMode: (data) => {
+    set(() => ({ isDarkMode: data }));
+  },
+});
+
 export const createCartSlice = (set: any): CartType => ({
   cartItem: [],
   addCartItem: (product) => {

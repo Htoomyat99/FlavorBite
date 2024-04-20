@@ -10,9 +10,9 @@ import CartFooter from "@/src/screens/dashboard/cart/cartFooter/CartFooter";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { useRouter } from "expo-router";
 import { insertOrderAndOrderDetail } from "@/domain/dashboard/insert_order_and_order_detail";
-import LoadingView from "@/src/components/LoadingView";
+import LoadingModal from "@/src/modal/LoadingModal";
 import { useLocale } from "@/src/hooks/useLocale";
-import ErrorAlertModal from "@/src/components/ErrorAlertModal";
+import ErrorAlertModal from "@/src/modal/ErrorAlertModal";
 
 const cart = () => {
   const theme = useTheme();
@@ -120,7 +120,7 @@ const cart = () => {
         hideModal={() => setErrVisible({ status: false, message: "" })}
       />
 
-      {loading && <LoadingView />}
+      {loading && <LoadingModal />}
     </View>
   );
 };

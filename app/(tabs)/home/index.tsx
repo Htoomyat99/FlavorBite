@@ -4,19 +4,19 @@ import { useTheme } from "react-native-paper";
 import useInternetConnection from "@/src/hooks/useInternetLocation";
 import ProductSearchBar from "@/src/screens/dashboard/product/searchBar/ProductSearchBar";
 import ProductList from "@/src/screens/dashboard/product/productList/ProductList";
-import CustomBottomSheetModal from "@/src/components/CustomBottomSheetModal";
+import CustomBottomSheetModal from "@/src/modal/CustomBottomSheetModal";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import ProductDetailScreen from "@/src/screens/dashboard/productDetail/ProductDetailScreen";
 import { useStore } from "@/src/store/store";
 import { useRouter } from "expo-router";
 import { getUserData } from "@/domain/dashboard/get_user_data";
 import { getSaleItems } from "@/domain/dashboard/get_sale_items";
-import LoadingView from "@/src/components/LoadingView";
+import LoadingModal from "@/src/modal/LoadingModal";
 import EmptyProduct from "@/src/screens/dashboard/product/productList/EmptyProduct";
 import { FlashList } from "@shopify/flash-list";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
-import ErrorAlertModal from "@/src/components/ErrorAlertModal";
+import ErrorAlertModal from "@/src/modal/ErrorAlertModal";
 
 const index = () => {
   const theme = useTheme();
@@ -46,6 +46,7 @@ const index = () => {
     if (error) {
       setErrVisible({ status: true, message: error.message });
       setLoading(false);
+      console.log(error);
       return;
     }
     updateUserData(data[0]);
@@ -140,7 +141,7 @@ const index = () => {
         hideModal={() => setErrVisible({ status: false, message: "" })}
       />
 
-      {loading && <LoadingView />}
+      {loading && <LoadingModal />}
     </View>
   );
 };

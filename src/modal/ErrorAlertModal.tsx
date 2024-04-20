@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Icon, Modal, Portal, Text, useTheme } from "react-native-paper";
-import styles from "./style";
 import { TouchableOpacity, View } from "react-native";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import { useLocale } from "../hooks/useLocale";
+import styles from "./style";
 
 interface Props {
   errVisible: { status: boolean; message?: string };
@@ -18,7 +18,10 @@ const ErrorAlertModal = ({ errVisible, hideModal }: Props) => {
       <Modal
         visible={errVisible.status}
         onDismiss={hideModal}
-        contentContainerStyle={styles.modalContainer}
+        contentContainerStyle={[
+          styles.errModalContainer,
+          { backgroundColor: theme.colors.background },
+        ]}
       >
         <View>
           <View style={styles.errorContainer}>

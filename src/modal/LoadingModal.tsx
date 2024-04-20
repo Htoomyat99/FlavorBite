@@ -1,10 +1,9 @@
-import { View, Text, Modal } from "react-native";
+import { View, Modal } from "react-native";
 import React from "react";
 import AnimatedLottieView from "lottie-react-native";
-
 import styles from "./style";
 
-const LoadingView = () => {
+const LoadingModal = () => {
   return (
     <Modal transparent={true} visible={true} animationType="fade">
       <View style={styles.indicatorContainer}>
@@ -21,4 +20,4 @@ const LoadingView = () => {
   );
 };
 
-export default LoadingView;
+export default LoadingModal;
