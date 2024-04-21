@@ -1,14 +1,13 @@
 import { ScrollView, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
-import styles from "./style";
 import { Button, Text, TextInput, useTheme } from "react-native-paper";
 import { FormBuilder } from "react-native-paper-form-builder";
 import { useForm } from "react-hook-form";
+
+import styles from "./style";
 import { useLocale } from "@/src/hooks/useLocale";
 import { getSignUpFormArray } from "../AuthData";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
-import LoadingModal from "@/src/modal/LoadingModal";
-import ErrorAlertModal from "@/src/modal/ErrorAlertModal";
 
 interface Props {
   goSignInAction: () => void;
@@ -18,16 +17,10 @@ interface Props {
     confirmPassword: string;
   }) => void;
   signInWithGoogleAction: () => void;
-  loading: boolean;
-  errVisible: { status: boolean; message?: string };
-  hideModal: () => void;
 }
 const SignUpScreen = (props: Props) => {
   const locale = useLocale();
   const theme = useTheme();
-
-  const [passSecure, setPassSecure] = useState(true);
-  const [confirmPassSecure, setConfirmPassSecure] = useState(true);
 
   const { control, setFocus, handleSubmit } = useForm({
     defaultValues: {
@@ -36,6 +29,9 @@ const SignUpScreen = (props: Props) => {
       confirmPassword: "",
     },
   });
+
+  const [passSecure, setPassSecure] = useState(true);
+  const [confirmPassSecure, setConfirmPassSecure] = useState(true);
 
   return (
     <ScrollView
@@ -104,12 +100,6 @@ const SignUpScreen = (props: Props) => {
           </Text>
         </TouchableOpacity>
       </View>
-
-      <ErrorAlertModal
-        errVisible={props.errVisible}
-        hideModal={props.hideModal}
-      />
-      {props.loading && <LoadingModal />}
     </ScrollView>
   );
 };

@@ -5,11 +5,13 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+
 import { useLocale } from "@/src/hooks/useLocale";
 
 const OrderDetailHeader = () => {
   const theme = useTheme();
   const locale = useLocale();
+
   return (
     <View style={styles.container}>
       <Icon

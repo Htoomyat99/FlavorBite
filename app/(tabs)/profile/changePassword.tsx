@@ -1,17 +1,18 @@
 import {
   View,
-  ToastAndroid,
   TouchableWithoutFeedback,
   Keyboard,
+  ToastAndroid,
 } from "react-native";
 import React, { useState } from "react";
-import ChangePassword from "@/src/screens/dashboard/changePassword/ChangePassword";
 import { useRouter } from "expo-router";
+import { useTheme } from "react-native-paper";
+
+import ChangePassword from "@/src/screens/dashboard/changePassword/ChangePassword";
 import LoadingModal from "@/src/modal/LoadingModal";
 import ErrorAlertModal from "@/src/modal/ErrorAlertModal";
 import { changeUserPassword } from "@/domain/auth/change_password";
 import { useLocale } from "@/src/hooks/useLocale";
-import { useTheme } from "react-native-paper";
 
 const changePassword = () => {
   const router = useRouter();
@@ -35,10 +36,7 @@ const changePassword = () => {
     }
 
     setLoading(true);
-    const { data, error } = await changeUserPassword(
-      formData.currentPassword,
-      formData.newPassword
-    );
+    const { data, error } = await changeUserPassword(formData.newPassword);
 
     if (error) {
       setErrVisible({ status: true, message: error.message });
@@ -53,7 +51,7 @@ const changePassword = () => {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
+      <View style={{ flex: 1, backgroundColor: theme.colors.elevation.level1 }}>
         <ChangePassword
           backAction={backAction}
           changePasswordAction={changePasswordAction}

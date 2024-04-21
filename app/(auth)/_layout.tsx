@@ -1,4 +1,3 @@
-import { View, Text } from "react-native";
 import React from "react";
 import { Stack } from "expo-router";
 
@@ -9,6 +8,9 @@ const _layout = () => {
       <Stack.Screen name="onboarding" />
       <Stack.Screen name="signIn" />
       <Stack.Screen name="signUp" />
+      <Stack.Screen name="resetPassword" />
+      <Stack.Screen name="setNewPassword" />
+      <Stack.Screen name="userRegister" />
     </Stack>
   );
 };

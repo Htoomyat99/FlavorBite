@@ -1,12 +1,11 @@
-import { View, Text } from "react-native";
 import React from "react";
 import { Appbar, useTheme } from "react-native-paper";
 import { useRouter } from "expo-router";
-import { useLocale } from "@/src/hooks/useLocale";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
+import { useLocale } from "@/src/hooks/useLocale";
+
 const ProfileAppBar = () => {
-  const router = useRouter();
   const locale = useLocale();
   const theme = useTheme();
   return (

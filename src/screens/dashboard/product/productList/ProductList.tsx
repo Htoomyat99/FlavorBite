@@ -1,22 +1,11 @@
-import {
-  View,
-  Alert,
-  TouchableOpacity,
-  Image,
-  TouchableWithoutFeedback,
-  Keyboard,
-  RefreshControl,
-} from "react-native";
-import React, { useEffect, useState } from "react";
-import { FlashList } from "@shopify/flash-list";
-import styles from "./style";
+import { TouchableOpacity, Image } from "react-native";
+import React from "react";
 import { useTheme, Text, Badge } from "react-native-paper";
-import { getSaleItems } from "@/domain/dashboard/get_sale_items";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
+
+import styles from "./style";
 import { useStore } from "@/src/store/store";
 import { useLocale } from "@/src/hooks/useLocale";
-import AnimatedLottieView from "lottie-react-native";
-import { widthPercentageToDP as wp } from "react-native-responsive-screen";
-import EmptyProduct from "./EmptyProduct";
 
 interface Props {
   goProductDetail: (item: ProductDataType) => void;

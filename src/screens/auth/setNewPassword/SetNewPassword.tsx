@@ -1,48 +1,51 @@
 import { View } from "react-native";
 import React from "react";
-import { Appbar, Button, useTheme } from "react-native-paper";
+import { Appbar, Button, Text, useTheme } from "react-native-paper";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { FormBuilder } from "react-native-paper-form-builder";
 import { useForm } from "react-hook-form";
 
-import { useLocale } from "@/src/hooks/useLocale";
-import { getChangePasswordFormArray } from "./ChangePasswordFormData";
 import styles from "./style";
+import { getResetFormArray } from "../AuthData";
+import { useLocale } from "@/src/hooks/useLocale";
 
-interface Props {
-  backAction: () => void;
-  changePasswordAction: (formData: passType) => void;
-}
-
-const ChangePassword = ({ backAction, changePasswordAction }: Props) => {
-  const theme = useTheme();
+const SetNewPassword = ({
+  resetPasswordAction,
+}: {
+  resetPasswordAction: (data: {
+    newPassword: string;
+    confirmPassword: string;
+  }) => void;
+}) => {
   const locale = useLocale();
-
+  const theme = useTheme();
   const { control, setFocus, handleSubmit } = useForm({
     defaultValues: {
-      currentPassword: "",
       newPassword: "",
       confirmPassword: "",
     },
   });
-
   return (
     <View style={styles.container}>
-      <Appbar.Header style={{ backgroundColor: theme.colors.elevation.level2 }}>
-        <Appbar.BackAction onPress={backAction} />
+      <Appbar.Header
+        mode="center-aligned"
+        style={{ backgroundColor: theme.colors.elevation.level2 }}
+      >
         <Appbar.Content
-          title={locale.changePassword}
+          title="Reset Password"
           titleStyle={{ fontSize: hp(2.5) }}
         />
       </Appbar.Header>
 
-      <View style={styles.fomrBuilder}>
+      <Text style={styles.headerText}>{locale.enterNewPassword}</Text>
+
+      <Text style={styles.paraText}>{locale.passShouldDifferent}</Text>
+
+      <View style={styles.formBuilder}>
         <FormBuilder
           control={control}
           setFocus={setFocus}
-          formConfigArray={getChangePasswordFormArray(
-            locale.currentPassword,
-            locale.currentPasswordRequire,
+          formConfigArray={getResetFormArray(
             locale.newPassword,
             locale.newPasswordRequire,
             locale.confirmPassword,
@@ -54,12 +57,12 @@ const ChangePassword = ({ backAction, changePasswordAction }: Props) => {
       <Button
         style={styles.btnContainer}
         mode="contained"
-        onPress={handleSubmit(changePasswordAction)}
+        onPress={handleSubmit(resetPasswordAction)}
       >
-        {locale.changePassword}
+        {locale.resetPassword}
       </Button>
     </View>
   );
 };
 
-export default ChangePassword;
+export default SetNewPassword;

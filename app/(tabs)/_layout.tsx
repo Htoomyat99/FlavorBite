@@ -86,5 +86,3 @@ const _layout = () => {
 };
 
 export default _layout;
-
-//account

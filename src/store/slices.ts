@@ -1,4 +1,4 @@
-export const createAuthSlice = (set: any): AuthType => ({
+export const createAuthSlice = (set: SetType): AuthType => ({
   onboarding: false,
   updateOnboarding: (data) => {
     set(() => ({ onboarding: data }));
@@ -11,26 +11,30 @@ export const createAuthSlice = (set: any): AuthType => ({
   updateUserId: (data) => {
     set(() => ({ userId: data }));
   },
+  resetPass: false,
+  updateResetPass: (data) => {
+    set(() => ({ resetPass: data }));
+  },
 });
 
-export const createLangSlice = (set: any): LangType => ({
+export const createLangSlice = (set: SetType): LangType => ({
   lang: "en",
   updateLang: (data) => {
     set(() => ({ lang: data }));
   },
 });
 
-export const createDarkThemeSlice = (set: any): DarkThemeType => ({
+export const createDarkThemeSlice = (set: SetType): DarkThemeType => ({
   isDarkMode: false,
   updateDarkMode: (data) => {
     set(() => ({ isDarkMode: data }));
   },
 });
 
-export const createCartSlice = (set: any): CartType => ({
+export const createCartSlice = (set: SetType): CartType => ({
   cartItem: [],
   addCartItem: (product) => {
-    set((state: any) => {
+    set((state) => {
       let index = state.cartItem.findIndex(
         (item: CartDataType) => item.item_code === product.item_code
       );
@@ -44,15 +48,20 @@ export const createCartSlice = (set: any): CartType => ({
     });
   },
   deleteEachCartItem: (itemCode) => {
-    set((state: any) => {
+    set((state) => {
       state.cartItem = state.cartItem.filter(
         (item: CartDataType) => item.item_code !== itemCode
       );
     });
   },
   deleteAllCartItem: () => {
-    set((state: any) => {
+    set((state) => {
       state.cartItem = [];
     });
+  },
+
+  orderTrigger: false,
+  setOrderTrigger: (data) => {
+    set(() => ({ orderTrigger: data }));
   },
 });

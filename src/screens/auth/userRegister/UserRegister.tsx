@@ -1,4 +1,3 @@
-import React from "react";
 import {
   View,
   Image,
@@ -6,26 +5,24 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { Button, Icon, useTheme } from "react-native-paper";
+import React from "react";
+import { heightPercentageToDP as hp } from "react-native-responsive-screen";
+import { Appbar, Button, Icon, useTheme } from "react-native-paper";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import { FormBuilder } from "react-native-paper-form-builder";
 import { useForm } from "react-hook-form";
 
 import styles from "./style";
-import { getEditFormConfig } from "./EditFormConfigData";
 import { useLocale } from "@/src/hooks/useLocale";
+import { getEditFormConfig } from "../../dashboard/editAccount/EditFormConfigData";
 
 interface Props {
-  closeBottomSheetAction: () => void;
-  userData: UserType;
   openCameraModal: () => void;
   updateUserInfoAction: (data: any) => void;
   photo: string;
 }
 
-const EditAccount = ({
-  closeBottomSheetAction,
-  userData,
+const UserRegister = ({
   openCameraModal,
   updateUserInfoAction,
   photo,
@@ -35,21 +32,23 @@ const EditAccount = ({
 
   const { control, setFocus, handleSubmit } = useForm({
     defaultValues: {
-      name: userData?.user_name,
-      phone: userData?.phone,
-      address: userData?.address,
+      name: "",
+      phone: "",
+      address: "",
     },
   });
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.iconContainer}
-          activeOpacity={0.8}
-          onPress={closeBottomSheetAction}
+        <Appbar.Header
+          mode="center-aligned"
+          style={{ backgroundColor: theme.colors.elevation.level2 }}
         >
-          <Icon source={"close"} size={wp(6)} />
-        </TouchableOpacity>
+          <Appbar.Content
+            title={locale.userInfo}
+            titleStyle={{ fontSize: hp(2.5) }}
+          />
+        </Appbar.Header>
 
         <TouchableOpacity
           activeOpacity={0.8}
@@ -96,4 +95,4 @@ const EditAccount = ({
   );
 };
 
-export default EditAccount;
+export default UserRegister;

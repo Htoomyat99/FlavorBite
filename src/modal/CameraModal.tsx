@@ -1,10 +1,8 @@
 import { View, TouchableOpacity } from "react-native";
 import React from "react";
 import { Icon, Modal, Portal, useTheme, Text } from "react-native-paper";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
+
 import styles from "./style";
 import { useLocale } from "@/src/hooks/useLocale";
 

@@ -1,7 +1,12 @@
-import { View } from "react-native";
+import { ToastAndroid, View } from "react-native";
 import React, { useMemo, useRef, useState } from "react";
-import AccountAppBar from "@/src/screens/dashboard/account/AccountAppBar";
 import { useRouter } from "expo-router";
+import { useTheme } from "react-native-paper";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { Camera, CameraType } from "expo-camera";
+import * as ImagePicker from "expo-image-picker";
+import { FlipType, SaveFormat, manipulateAsync } from "expo-image-manipulator";
+
 import {
   AccountListHeader,
   AccountBody,
@@ -9,17 +14,14 @@ import {
 import { FlashList } from "@shopify/flash-list";
 import { useStore } from "@/src/store/store";
 import { useLocale } from "@/src/hooks/useLocale";
-import { useTheme } from "react-native-paper";
 import CustomBottomSheetModal from "@/src/modal/CustomBottomSheetModal";
-import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import EditAccount from "@/src/screens/dashboard/editAccount/EditAccount";
 import { updateUserInfo } from "@/domain/auth/update_user";
 import LoadingModal from "@/src/modal/LoadingModal";
 import CameraModal from "@/src/modal/CameraModal";
-import { Camera, CameraType } from "expo-camera";
-import * as ImagePicker from "expo-image-picker";
-import { FlipType, SaveFormat, manipulateAsync } from "expo-image-manipulator";
 import CustomCamera from "@/src/components/CustomCamera";
+import ErrorAlertModal from "@/src/modal/ErrorAlertModal";
+import AccountAppBar from "@/src/screens/dashboard/account/AccountAppBar";
 
 interface updateUserType {
   name: string;
@@ -32,29 +34,35 @@ const account = () => {
   const locale = useLocale();
   const theme = useTheme();
 
-  const { userData, userId, updateUserData } = useStore();
+  const { userData, userId, updateUserData, orderTrigger, setOrderTrigger } =
+    useStore();
 
-  let splitParts = userData.id.split("-");
+  let splitParts = userId ? userId.split("-") : [];
   let id = splitParts[3] + "-" + splitParts[4];
 
   const data: UserInfoType[] = [
     { id: 1, label: locale.accountId, value: id },
-    { id: 2, label: locale.email, value: userData.email },
-    { id: 3, label: locale.userName, value: userData.user_name },
-    { id: 4, label: locale.phone, value: userData.phone },
-    { id: 5, label: locale.address, value: userData.address },
+    { id: 2, label: locale.email, value: userData?.email },
+    { id: 3, label: locale.userName, value: userData?.user_name },
+    { id: 4, label: locale.phone, value: userData?.phone },
+    { id: 5, label: locale.address, value: userData?.address },
   ];
 
+  const cameraRef: React.MutableRefObject<any> = useRef(null);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ["25%", "93%"], []);
-  const cameraRef: React.MutableRefObject<any> = useRef(null);
 
   const [permission, requestPermission] = Camera.useCameraPermissions();
   const [cameraVisible, setCameraVisible] = useState(false);
   const [openCamera, setOpenCamera] = useState(false);
-  const [photo, setPhoto] = useState(userData.photo);
+  const [photo, setPhoto] = useState(
+    userData.photo
+      ? userData.photo
+      : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+  );
   const [type, setType] = useState(CameraType.back);
   const [loading, setLoading] = useState(false);
+  const [errVisible, setErrVisible] = useState({ status: false, message: "" });
 
   const editProfileAction = () => {
     bottomSheetModalRef.current?.present();
@@ -136,7 +144,7 @@ const account = () => {
     const { data, error } = await updateUserInfo(userInfo, userId);
 
     if (error) {
-      console.log("error", error.message);
+      setErrVisible({ status: true, message: error.message });
       setLoading(false);
       return;
     }
@@ -144,11 +152,17 @@ const account = () => {
     setLoading(false);
     updateUserData(data[0]);
     bottomSheetModalRef.current?.close();
+    ToastAndroid.show(locale.updateProfileSuccess, ToastAndroid.SHORT);
+  };
+
+  const backAction = () => {
+    router.back();
+    setOrderTrigger(!orderTrigger);
   };
 
   return (
     <View style={{ flex: 1, backgroundColor: theme.colors.elevation.level1 }}>
-      <AccountAppBar backAction={() => router.back()} />
+      <AccountAppBar backAction={backAction} />
 
       <FlashList
         showsVerticalScrollIndicator={false}
@@ -156,7 +170,7 @@ const account = () => {
         estimatedItemSize={50}
         ListHeaderComponent={() => (
           <AccountListHeader
-            photo={userData.photo}
+            photo={userData?.photo}
             editProfileAction={editProfileAction}
           />
         )}
@@ -169,7 +183,7 @@ const account = () => {
         childern={
           <EditAccount
             closeBottomSheetAction={() => bottomSheetModalRef.current?.close()}
-            userData={userData}
+            userData={userData ? userData : ({} as UserType)}
             openCameraModal={() => setCameraVisible(true)}
             updateUserInfoAction={updateUserInfoAction}
             photo={photo}
@@ -185,6 +199,11 @@ const account = () => {
           setOpenCamera(true);
         }}
         onGalleryPress={openGalleryAction}
+      />
+
+      <ErrorAlertModal
+        errVisible={errVisible}
+        hideModal={() => setErrVisible({ status: false, message: "" })}
       />
 
       {loading && <LoadingModal />}

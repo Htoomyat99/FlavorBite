@@ -1,10 +1,11 @@
 import { TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 import { Icon, Modal, Portal, Text, useTheme } from "react-native-paper";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
+
 import styles from "./style";
 import { useStore } from "../store/store";
 import { useLocale } from "../hooks/useLocale";
-import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 interface Props {
   visible: boolean;
@@ -20,7 +21,7 @@ const LanguageModal = ({ visible, hideModal }: Props) => {
 
   let data = [
     { id: "en", name: "English" },
-    { id: "mm", name: "Myanmar" },
+    { id: "mm", name: "မြန်မာ" },
   ];
 
   const langChangeHandler = (id: string) => {

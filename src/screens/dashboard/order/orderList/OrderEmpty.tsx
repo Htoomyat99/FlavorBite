@@ -1,13 +1,13 @@
 import { View } from "react-native";
 import React from "react";
 import AnimatedLottieView from "lottie-react-native";
+import { Text } from "react-native-paper";
+
 import styles from "./style";
 import { useLocale } from "@/src/hooks/useLocale";
-import { useTheme, Text } from "react-native-paper";
 
 const OrderEmpty = () => {
   const locale = useLocale();
-  const theme = useTheme();
   return (
     <View style={styles.emptyContainer}>
       <AnimatedLottieView

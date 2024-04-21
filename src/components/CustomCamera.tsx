@@ -2,7 +2,7 @@ import { View } from "react-native";
 import React from "react";
 import { Camera, CameraType } from "expo-camera";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
-import { IconButton, useTheme } from "react-native-paper";
+import { IconButton } from "react-native-paper";
 import styles from "./style";
 
 interface Props {

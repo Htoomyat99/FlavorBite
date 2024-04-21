@@ -25,6 +25,16 @@ export default {
   dontHaveAccQue: `Don't have an account?`,
   signUp: "Sign Up",
 
+  //resetPassword
+  resetPassword: "Reset Password",
+  enterNewPassword: "Enter New Password",
+  passShouldDifferent:
+    "Password should be different from previously used passwords.",
+  resetPasswordSuccess: "Reset password successfully",
+  forgotPassQue: "Forgot your Password?",
+  enterEmailText: "Enter your email to reset it.",
+  update: "Update",
+
   //tablayout
   home: "Home",
   order: "Order",
@@ -66,11 +76,11 @@ export default {
   profile: "Profile",
   accountDetail: "Account Detail",
   about: "About",
-  terms: "Terms & Conditions",
   language: "Language",
   darkMode: "Dark Mode",
   logOut: "Logout",
   changePassword: "Change Password",
+  somethingWrong: "OOPS! Something went wrong",
 
   //userInfo
   userInfo: "User Info",
@@ -92,6 +102,7 @@ export default {
   passChangeSuccess: "Password changed successfully",
   newPassAndConfirmPassNotMatch:
     "New password and confirm password do not match",
+  updateProfileSuccess: "Update Profile Successfully",
 
   //errorModal
   error: "Error",

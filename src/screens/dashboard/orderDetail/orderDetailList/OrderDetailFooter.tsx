@@ -1,7 +1,8 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import React from "react";
+import { Divider, useTheme, Text } from "react-native-paper";
+
 import styles from "./style";
-import { Divider, useTheme } from "react-native-paper";
 import { useLocale } from "@/src/hooks/useLocale";
 
 const OrderDetailFooter = ({ orderInfo }: any) => {
@@ -20,7 +21,7 @@ const OrderDetailFooter = ({ orderInfo }: any) => {
 
   return (
     <View style={styles.footerContainer}>
-      <Divider bold />
+      <Divider bold style={{ backgroundColor: "#CCC" }} />
 
       <Text style={styles.orderTotalHeader}>{locale.orderTotal}</Text>
 

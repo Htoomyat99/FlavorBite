@@ -1,9 +1,10 @@
 import { View } from "react-native";
 import React from "react";
-import styles from "./style";
-import { Icon, useTheme, Text } from "react-native-paper";
-import { useLocale } from "@/src/hooks/useLocale";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
+import { Icon, useTheme, Text } from "react-native-paper";
+
+import { useLocale } from "@/src/hooks/useLocale";
+import styles from "./style";
 
 interface Props {
   orderInfo: any;

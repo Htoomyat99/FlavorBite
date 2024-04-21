@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import { useRouter } from "expo-router";
+import { View } from "react-native";
+import { useTheme } from "react-native-paper";
+
 import { signUpWithEmail } from "@/domain/auth/sign_up_with_email";
 import { useStore } from "@/src/store/store";
 import SignUpScreen from "@/src/screens/auth/signUp/SignUpScreen";
+import ErrorAlertModal from "@/src/modal/ErrorAlertModal";
+import LoadingModal from "@/src/modal/LoadingModal";
 
 const signUp = () => {
   const router = useRouter();
+  const theme = useTheme();
 
   const { updateUserId } = useStore();
   const [loading, setLoading] = useState(false);
@@ -15,7 +21,9 @@ const signUp = () => {
     router.push("/signIn");
   };
 
-  const signInWithGoogleAction = () => {};
+  const signInWithGoogleAction = () => {
+    setErrVisible({ status: true, message: "Not implemented yet" });
+  };
 
   const signUpAction = async (formData: {
     email: string;
@@ -41,18 +49,27 @@ const signUp = () => {
 
     setLoading(false);
     updateUserId(data?.user?.id);
-    router.replace("/(tabs)/home");
+    router.push({
+      pathname: "/userRegister",
+      params: { email: data?.user?.email as string },
+    });
   };
 
   return (
-    <SignUpScreen
-      goSignInAction={goSignInAction}
-      signUpAction={signUpAction}
-      signInWithGoogleAction={signInWithGoogleAction}
-      loading={loading}
-      errVisible={errVisible}
-      hideModal={() => setErrVisible({ status: false, message: "" })}
-    />
+    <View style={{ flex: 1, backgroundColor: theme.colors.elevation.level1 }}>
+      <SignUpScreen
+        goSignInAction={goSignInAction}
+        signUpAction={signUpAction}
+        signInWithGoogleAction={signInWithGoogleAction}
+      />
+
+      <ErrorAlertModal
+        errVisible={errVisible}
+        hideModal={() => setErrVisible({ status: false, message: "" })}
+      />
+
+      {loading && <LoadingModal />}
+    </View>
   );
 };
 

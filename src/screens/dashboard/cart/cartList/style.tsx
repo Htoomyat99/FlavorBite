@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   removeAndpriceContainer: {
     justifyContent: "space-between",
-    height: wp(21),
+    paddingVertical: wp(1.5),
   },
   remove: {
     fontSize: hp(1.7),

@@ -1,18 +1,19 @@
 import { View, Image, TouchableOpacity } from "react-native";
 import React from "react";
-import styles from "./style";
 import { useTheme, Text, Icon } from "react-native-paper";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
+
+import styles from "./style";
 import { useLocale } from "@/src/hooks/useLocale";
 
 interface Props {
   photo: string;
   editProfileAction: () => void;
 }
-
 const AccountListHeader = ({ photo, editProfileAction }: Props) => {
   const theme = useTheme();
   const locale = useLocale();
+
   return (
     <View style={styles.userInfoHeaderContainer}>
       <Image

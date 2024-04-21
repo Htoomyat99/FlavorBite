@@ -1,11 +1,12 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import React from "react";
 import { useLocalSearchParams } from "expo-router";
 import { useTheme } from "react-native-paper";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
-import OrderDetailAppBar from "@/src/screens/dashboard/orderDetail/orderDetailAppBar";
 import { FlashList } from "@shopify/flash-list";
+
+import OrderDetailAppBar from "@/src/screens/dashboard/orderDetail/orderDetailAppBar";
 import OrderDetailList from "@/src/screens/dashboard/orderDetail/orderDetailList/OrderDetailList";
 import OrderDetailHeader from "@/src/screens/dashboard/orderDetail/orderDetailList/OrderDetailHeader";
 import OrderDetailFooter from "@/src/screens/dashboard/orderDetail/orderDetailList/OrderDetailFooter";
@@ -20,7 +21,7 @@ const orderDetail = () => {
   const { userData } = useStore();
 
   return (
-    <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
+    <View style={{ flex: 1, backgroundColor: theme.colors.elevation.level1 }}>
       <OrderDetailAppBar />
 
       <OrderDetailInfo orderInfo={data.order} userData={userData} />

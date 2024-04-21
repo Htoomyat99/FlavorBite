@@ -1,8 +1,9 @@
 import { View, Text, ScrollView } from "react-native";
 import React from "react";
-import styles from "./style";
 import { Appbar, useTheme } from "react-native-paper";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
+
+import styles from "./style";
 import { useLocale } from "@/src/hooks/useLocale";
 
 const About = ({ backAction }: { backAction: () => void }) => {
@@ -18,11 +19,17 @@ const About = ({ backAction }: { backAction: () => void }) => {
   ];
   return (
     <View
-      style={[styles.container, { backgroundColor: theme.colors.background }]}
+      style={[
+        styles.container,
+        { backgroundColor: theme.colors.elevation.level1 },
+      ]}
     >
-      <Appbar.Header style={{ backgroundColor: theme.colors.elevation.level1 }}>
+      <Appbar.Header style={{ backgroundColor: theme.colors.elevation.level2 }}>
         <Appbar.BackAction onPress={backAction} />
-        <Appbar.Content title="About" titleStyle={{ fontSize: hp(2.5) }} />
+        <Appbar.Content
+          title={locale.about}
+          titleStyle={{ fontSize: hp(2.5) }}
+        />
       </Appbar.Header>
 
       <ScrollView style={styles.aboutContainer}>

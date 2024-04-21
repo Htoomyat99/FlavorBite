@@ -6,8 +6,6 @@ interface UserType {
   address: string;
   email: string;
   photo: string;
-  latitude?: string;
-  longitude?: string;
 }
 
 interface ProductDataType {

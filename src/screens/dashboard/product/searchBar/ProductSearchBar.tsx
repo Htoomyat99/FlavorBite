@@ -1,8 +1,9 @@
 import { View, TouchableOpacity, Keyboard } from "react-native";
 import React from "react";
 import { Badge, Icon, Searchbar } from "react-native-paper";
-import styles from "./style";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
+
+import styles from "./style";
 import { useLocale } from "@/src/hooks/useLocale";
 import { useStore } from "@/src/store/store";
 

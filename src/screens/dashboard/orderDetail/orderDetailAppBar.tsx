@@ -12,7 +12,7 @@ const OrderDetailAppBar = () => {
   return (
     <Appbar.Header
       mode="center-aligned"
-      style={{ backgroundColor: theme.colors.elevation.level1 }}
+      style={{ backgroundColor: theme.colors.elevation.level2 }}
     >
       <Appbar.BackAction onPress={() => router.back()} />
       <Appbar.Content

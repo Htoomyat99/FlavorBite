@@ -1,40 +1,66 @@
-import { View, Text, Alert } from "react-native";
-import React, { useMemo, useRef, useState } from "react";
+import { View } from "react-native";
+import React, { useEffect, useState } from "react";
 import { useTheme } from "react-native-paper";
+import { useRouter } from "expo-router";
+
 import useInternetConnection from "@/src/hooks/useInternetLocation";
 import { useStore } from "@/src/store/store";
-import { insertUserData } from "@/domain/auth/insert_user_data";
 import LanguageModal from "@/src/modal/LanguageModal";
 import { signOutWithEmail } from "@/domain/auth/sign_out_with_email";
-import { useRouter } from "expo-router";
 import ProfileAppBar from "@/src/screens/dashboard/profile/ProfileAppBar";
 import ProfileScreen from "@/src/screens/dashboard/profile/ProfileScreen";
 import ConfirmModal from "@/src/modal/ConfirmModal";
-import ChangePassword from "@/src/screens/dashboard/changePassword/ChangePassword";
-import ErrorAlertModal from "@/src/modal/ErrorAlertModal";
 import LoadingModal from "@/src/modal/LoadingModal";
+import ErrorAlertModal from "@/src/modal/ErrorAlertModal";
+import { useLocale } from "@/src/hooks/useLocale";
+import { getUserData } from "@/domain/dashboard/get_user_data";
 
 const index = () => {
   const router = useRouter();
   const theme = useTheme();
+  const locale = useLocale();
   const net = useInternetConnection();
 
-  const { isDarkMode, updateDarkMode } = useStore();
-  const onToggleSwitch = () => updateDarkMode(!isDarkMode);
+  const { isDarkMode, updateDarkMode, userId, updateUserData, orderTrigger } =
+    useStore();
 
-  const [errVisible, setErrVisible] = useState(false);
+  useEffect(() => {
+    fetchUserData();
+  }, [orderTrigger]);
+
+  const [userData, setUserData] = useState({} as UserType);
+  const [confirmVisible, setconfirmVisible] = useState(false);
+  const [errVisible, setErrVisible] = useState({ status: false, message: "" });
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const fetchUserData = async () => {
+    setLoading(true);
+    const { data, error } = await getUserData(userId as string);
+    if (error) {
+      setErrVisible({ status: true, message: error.message });
+      setLoading(false);
+      return;
+    }
+
+    setUserData(data[0]);
+    updateUserData(data[0]);
+    setLoading(false);
+  };
   const openLangModal = () => {
     setVisible(true);
   };
 
+  const onToggleSwitch = () => {
+    updateDarkMode(!isDarkMode);
+  };
+
   const signOutAction = async () => {
     setLoading(true);
+
     const { error } = await signOutWithEmail();
     if (error) {
-      Alert.alert(error.name, error.message);
+      setErrVisible({ status: true, message: error.message });
       setLoading(false);
       return;
     }
@@ -44,7 +70,7 @@ const index = () => {
   };
 
   const hideModal = () => {
-    setErrVisible(false);
+    setconfirmVisible(false);
   };
 
   const profileDetailAction = (item: number) => {
@@ -65,10 +91,11 @@ const index = () => {
         router.push("/profile/about");
         break;
       case 6:
-        setErrVisible(true);
+        setconfirmVisible(true);
         break;
       default:
-        console.log("show error");
+        setErrVisible({ status: true, message: locale.somethingWrong });
+        break;
     }
   };
 
@@ -80,15 +107,21 @@ const index = () => {
         isDarkMode={isDarkMode}
         onToggleSwitch={onToggleSwitch}
         profileDetailAction={profileDetailAction}
+        userData={userData}
       />
 
       <LanguageModal visible={visible} hideModal={() => setVisible(false)} />
 
       <ConfirmModal
-        errVisible={errVisible}
+        confirmVisible={confirmVisible}
         hideModal={hideModal}
         cancelAction={hideModal}
         confirmAction={signOutAction}
+      />
+
+      <ErrorAlertModal
+        errVisible={errVisible}
+        hideModal={() => setErrVisible({ status: false, message: "" })}
       />
 
       {loading && <LoadingModal />}

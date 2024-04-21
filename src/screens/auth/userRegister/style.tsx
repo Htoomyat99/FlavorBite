@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     paddingVertical: hp(2),
     alignItems: "center",
+    marginTop: hp(2),
     width: wp(25),
     alignSelf: "center",
   },
@@ -30,11 +31,11 @@ const styles = StyleSheet.create({
   },
   formBuilder: {
     paddingHorizontal: wp(5),
-    marginTop: hp(5),
+    marginTop: hp(7),
   },
   confirmBtn: {
     marginHorizontal: wp(5),
-    marginTop: hp(5),
+    marginTop: hp(7),
   },
   confirmBtnText: {
     fontSize: hp(1.8),

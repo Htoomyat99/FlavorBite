@@ -1,14 +1,15 @@
-import { Alert, ToastAndroid, View } from "react-native";
+import { ToastAndroid, View } from "react-native";
 import React, { useState } from "react";
+import { FlashList } from "@shopify/flash-list";
+import { useTheme } from "react-native-paper";
+import { heightPercentageToDP as hp } from "react-native-responsive-screen";
+import { useRouter } from "expo-router";
+
 import { useStore } from "@/src/store/store";
 import CartAppBar from "@/src/screens/dashboard/cart/cartAppBar/CartAppBar";
 import CartList from "@/src/screens/dashboard/cart/cartList/CartList";
-import { FlashList } from "@shopify/flash-list";
 import EmptyCart from "@/src/screens/dashboard/cart/cartList/EmptyCart";
-import { useTheme } from "react-native-paper";
 import CartFooter from "@/src/screens/dashboard/cart/cartFooter/CartFooter";
-import { heightPercentageToDP as hp } from "react-native-responsive-screen";
-import { useRouter } from "expo-router";
 import { insertOrderAndOrderDetail } from "@/domain/dashboard/insert_order_and_order_detail";
 import LoadingModal from "@/src/modal/LoadingModal";
 import { useLocale } from "@/src/hooks/useLocale";
@@ -24,6 +25,9 @@ const cart = () => {
     addCartItem,
     userId,
     deleteAllCartItem,
+    userData,
+    setOrderTrigger,
+    orderTrigger,
   } = useStore();
 
   const [loading, setLoading] = useState(false);
@@ -58,7 +62,7 @@ const cart = () => {
   const orderAction = async (totalAmount: number) => {
     let orderData = {
       customer_id: userId,
-      customer_name: "htoo myat",
+      customer_name: userData.user_name,
       delivery_date: null,
       item_amount: totalAmount,
     };
@@ -83,12 +87,13 @@ const cart = () => {
     setLoading(false);
     router.back();
     router.push("/(tabs)/order");
+    setOrderTrigger(!orderTrigger);
     deleteAllCartItem();
     ToastAndroid.show(locale.orderSuccess, ToastAndroid.SHORT);
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
+    <View style={{ flex: 1, backgroundColor: theme.colors.elevation.level1 }}>
       <CartAppBar />
 
       {cartItem.length > 0 ? (

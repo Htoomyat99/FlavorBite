@@ -101,3 +101,62 @@ export const getSignInFormArray = (
     },
   ];
 };
+
+export const getForgotFormArray = (
+  email: string,
+  emailRequire: string
+): (Omit<LogicProps, "control"> | Omit<LogicProps, "control">[])[] => {
+  return [
+    {
+      type: "email",
+      name: "email",
+
+      rules: {
+        required: {
+          value: true,
+          message: emailRequire,
+        },
+      },
+      textInputProps: {
+        label: email,
+      },
+    },
+  ];
+};
+
+export const getResetFormArray = (
+  newPassword: string,
+  newPasswordRequire: string,
+  confirmPassword: string,
+  confirmPasswordRequire: string
+): (Omit<LogicProps, "control"> | Omit<LogicProps, "control">[])[] => {
+  return [
+    {
+      type: "text",
+      name: "newPassword",
+
+      rules: {
+        required: {
+          value: true,
+          message: newPasswordRequire,
+        },
+      },
+      textInputProps: {
+        label: newPassword,
+      },
+    },
+    {
+      type: "text",
+      name: "confirmPassword",
+      rules: {
+        required: {
+          value: true,
+          message: confirmPasswordRequire,
+        },
+      },
+      textInputProps: {
+        label: confirmPassword,
+      },
+    },
+  ];
+};

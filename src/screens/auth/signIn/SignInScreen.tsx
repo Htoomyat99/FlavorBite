@@ -1,22 +1,18 @@
 import { ScrollView, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
-import styles from "./style";
 import { Button, Text, TextInput, useTheme } from "react-native-paper";
 import { FormBuilder } from "react-native-paper-form-builder";
 import { useForm } from "react-hook-form";
+
+import styles from "./style";
 import { useLocale } from "@/src/hooks/useLocale";
 import { getSignInFormArray } from "../AuthData";
-import LoadingModal from "@/src/modal/LoadingModal";
-import ErrorAlertModal from "@/src/modal/ErrorAlertModal";
 
 interface Props {
   goSignUpAction: () => void;
   signInAction: (formData: { email: string; password: string }) => void;
   signInWithGoogleAction: () => void;
   forgotPassAction: () => void;
-  loading: boolean;
-  errVisible: { status: boolean; message?: string };
-  hideModal: () => void;
 }
 const SignInScreen = (props: Props) => {
   const locale = useLocale();
@@ -31,12 +27,7 @@ const SignInScreen = (props: Props) => {
   });
 
   return (
-    <ScrollView
-      style={[
-        styles.mainContainer,
-        { backgroundColor: theme.colors.background },
-      ]}
-    >
+    <ScrollView style={styles.mainContainer}>
       <View style={styles.container}>
         <Text style={styles.welcomeText}>{locale.welcome}</Text>
         <Text style={styles.para}>{locale.signInPara}</Text>
@@ -96,13 +87,6 @@ const SignInScreen = (props: Props) => {
           </Text>
         </TouchableOpacity>
       </View>
-
-      <ErrorAlertModal
-        errVisible={props.errVisible}
-        hideModal={props.hideModal}
-      />
-
-      {props.loading && <LoadingModal />}
     </ScrollView>
   );
 };

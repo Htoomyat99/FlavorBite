@@ -9,7 +9,7 @@ const OrderAppBar = () => {
   return (
     <Appbar.Header
       mode="center-aligned"
-      style={{ backgroundColor: theme.colors.elevation.level1 }}
+      style={{ backgroundColor: theme.colors.elevation.level2 }}
     >
       <Appbar.Content title={locale.order} titleStyle={{ fontSize: hp(2.5) }} />
     </Appbar.Header>

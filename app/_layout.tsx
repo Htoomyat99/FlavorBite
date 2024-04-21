@@ -3,16 +3,17 @@ import { Stack, useRouter } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { PaperProvider, MD3DarkTheme, MD3LightTheme } from "react-native-paper";
 import { Alert, useColorScheme } from "react-native";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+
 import { Colors } from "@/constants/Colors";
 import { getCurrentSession } from "@/domain/auth/get_current_session";
 import { useStore } from "@/src/store/store";
-import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 const _layout = () => {
   const colorTheme = useColorScheme();
   const router = useRouter();
 
-  const { updateUserId, isDarkMode } = useStore();
+  const { updateUserId, isDarkMode, resetPass } = useStore();
 
   useEffect(() => {
     currentSession();
@@ -21,8 +22,12 @@ const _layout = () => {
   const currentSession = async () => {
     router.replace("/splash");
 
-    const { data, error } = await getCurrentSession();
+    if (resetPass) {
+      router.replace("/setNewPassword");
+      return;
+    }
 
+    const { data, error } = await getCurrentSession();
     if (error) {
       Alert.alert(error.name, error.message);
       router.replace("/signIn");

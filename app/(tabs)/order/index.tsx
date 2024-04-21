@@ -1,16 +1,17 @@
 import { View, RefreshControl } from "react-native";
 import React, { useEffect, useState } from "react";
+import { useTheme } from "react-native-paper";
+import { useNavigation } from "expo-router";
+import { FlashList } from "@shopify/flash-list";
+
 import { useStore } from "@/src/store/store";
 import { getOrderItems } from "@/domain/dashboard/get_order_items";
 import { getOrderDetailItem } from "@/domain/dashboard/get_order_detail_item";
 import OrderAppBar from "@/src/screens/dashboard/order/OrderAppBar";
 import LoadingModal from "@/src/modal/LoadingModal";
 import ErrorAlertModal from "@/src/modal/ErrorAlertModal";
-import { FlashList } from "@shopify/flash-list";
 import OrderList from "@/src/screens/dashboard/order/orderList/OrderList";
 import OrderEmpty from "@/src/screens/dashboard/order/orderList/OrderEmpty";
-import { useTheme } from "react-native-paper";
-import { useNavigation } from "expo-router";
 
 type NavigationProps = {
   navigate: (name: string, params?: { [key: string]: any }) => void;
@@ -19,7 +20,7 @@ type NavigationProps = {
 const order = () => {
   const theme = useTheme();
   const navigation = useNavigation<NavigationProps>();
-  const { userId } = useStore();
+  const { orderTrigger, userId } = useStore();
 
   const [orderData, setOrderData] = useState<OrderDataType[]>([]);
   const [loading, setLoading] = useState(false);
@@ -27,7 +28,7 @@ const order = () => {
 
   useEffect(() => {
     getOrder();
-  }, [userId]);
+  }, [orderTrigger]);
 
   const getOrder = async () => {
     setLoading(true);
@@ -62,7 +63,7 @@ const order = () => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
+    <View style={{ flex: 1, backgroundColor: theme.colors.elevation.level1 }}>
       <OrderAppBar />
 
       {orderData.length === 0 && !loading ? (

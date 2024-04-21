@@ -1,6 +1,7 @@
 import { View, Image } from "react-native";
 import React from "react";
 import { Text, useTheme } from "react-native-paper";
+
 import styles from "./style";
 import { useLocale } from "@/src/hooks/useLocale";
 
@@ -15,7 +16,7 @@ const OrderDetailList = ({ data }: any) => {
       ]}
     >
       <Image
-        style={[styles.image, { backgroundColor: theme.colors.background }]}
+        style={[styles.image, { backgroundColor: "#fff" }]}
         source={{ uri: data.item_image }}
       />
       <View style={styles.textContainer}>

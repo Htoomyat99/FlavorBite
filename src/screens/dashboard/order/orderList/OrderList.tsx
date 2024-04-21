@@ -1,8 +1,9 @@
-import { View, TouchableOpacity, Image } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import React from "react";
 import { Text, useTheme } from "react-native-paper";
-import styles from "./style";
 import AnimatedLottieView from "lottie-react-native";
+
+import styles from "./style";
 import { useLocale } from "@/src/hooks/useLocale";
 
 interface Props {

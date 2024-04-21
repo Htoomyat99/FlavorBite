@@ -2,6 +2,7 @@ import * as React from "react";
 import { Icon, Modal, Portal, Text, useTheme } from "react-native-paper";
 import { TouchableOpacity, View } from "react-native";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
+
 import { useLocale } from "../hooks/useLocale";
 import styles from "./style";
 

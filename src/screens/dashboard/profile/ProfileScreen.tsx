@@ -1,23 +1,22 @@
 import { View, Image, TouchableOpacity } from "react-native";
 import React from "react";
-import styles from "./style";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
+import { FlashList } from "@shopify/flash-list";
+
 import { useTheme, Text, Icon, Switch } from "react-native-paper";
 import { useLocale } from "@/src/hooks/useLocale";
-import { FlashList } from "@shopify/flash-list";
-import { widthPercentageToDP as wp } from "react-native-responsive-screen";
-import { useStore } from "@/src/store/store";
+import styles from "./style";
 
 interface Props {
   isDarkMode: boolean;
   onToggleSwitch: () => void;
   profileDetailAction: (item: number) => void;
+  userData: UserType;
 }
 
 const ProfileScreen = (props: Props) => {
   const theme = useTheme();
   const locale = useLocale();
-
-  const { userData } = useStore();
 
   const profileData: ProfileType[] = [
     { id: 1, name: locale.accountDetail, icon: "badge-account-horizontal" },
@@ -55,16 +54,21 @@ const ProfileScreen = (props: Props) => {
       </TouchableOpacity>
     );
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <Image
-          source={{ uri: userData.photo }}
+          source={{
+            uri: props.userData.photo
+              ? props.userData.photo
+              : "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+          }}
           style={[styles.image, { backgroundColor: theme.colors.background }]}
         />
 
-        <Text style={styles.nameText}>{userData.user_name}</Text>
-        <Text style={styles.emailText}>{userData.email}</Text>
+        <Text style={styles.nameText}>{props.userData?.user_name}</Text>
+        <Text style={styles.emailText}>{props.userData?.email}</Text>
       </View>
 
       <View style={{ flex: 1 }}>

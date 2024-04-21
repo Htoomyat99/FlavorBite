@@ -29,7 +29,7 @@ const CustomBottomSheetModal = (props: Props) => {
       snapPoints={props.snapPoints}
       enableContentPanningGesture={false}
       backgroundStyle={{
-        backgroundColor: theme.colors.background,
+        backgroundColor: theme.colors.elevation.level3,
         borderTopRightRadius: wp(10),
         borderTopLeftRadius: wp(10),
       }}

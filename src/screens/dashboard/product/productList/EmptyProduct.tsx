@@ -1,4 +1,4 @@
-import { View, Text, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { TouchableWithoutFeedback, Keyboard } from "react-native";
 import React from "react";
 import AnimatedLottieView from "lottie-react-native";
 import styles from "./style";
