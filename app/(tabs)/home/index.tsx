@@ -13,7 +13,6 @@ import ProductList from "@/src/screens/dashboard/product/productList/ProductList
 import CustomBottomSheetModal from "@/src/modal/CustomBottomSheetModal";
 import ProductDetailScreen from "@/src/screens/dashboard/productDetail/ProductDetailScreen";
 import { useStore } from "@/src/store/store";
-import { getUserData } from "@/domain/dashboard/get_user_data";
 import { getSaleItems } from "@/domain/dashboard/get_sale_items";
 import LoadingModal from "@/src/modal/LoadingModal";
 import EmptyProduct from "@/src/screens/dashboard/product/productList/EmptyProduct";
@@ -24,11 +23,12 @@ const index = () => {
   const router = useRouter();
   const net = useInternetConnection();
 
+  const { addCartItem, cartItem, orderTrigger } = useStore();
+
   useEffect(() => {
     fetchSaleItems();
-  }, []);
+  }, [orderTrigger]);
 
-  const { addCartItem, cartItem, userId, updateUserData } = useStore();
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ["25%", "93%"], []);
 
@@ -84,6 +84,7 @@ const index = () => {
   const addCartAction = (newData: CartDataType) => {
     addCartItem(newData);
     bottomSheetModalRef.current?.close();
+    fetchSaleItems();
   };
 
   const data = searchText.length > 0 ? searchData : productData;
@@ -112,7 +113,7 @@ const index = () => {
             refreshControl={
               <RefreshControl
                 onRefresh={() => fetchSaleItems()}
-                refreshing={loading}
+                refreshing={false}
               />
             }
           />

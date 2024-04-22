@@ -92,9 +92,14 @@ const cart = () => {
     ToastAndroid.show(locale.orderSuccess, ToastAndroid.SHORT);
   };
 
+  const backAction = () => {
+    router.back();
+    setOrderTrigger(!orderTrigger);
+  };
+
   return (
     <View style={{ flex: 1, backgroundColor: theme.colors.elevation.level1 }}>
-      <CartAppBar />
+      <CartAppBar backAction={backAction} />
 
       {cartItem.length > 0 ? (
         <View style={{ height: hp(70) }}>
