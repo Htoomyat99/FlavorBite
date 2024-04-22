@@ -21,8 +21,14 @@ const index = () => {
   const locale = useLocale();
   const net = useInternetConnection();
 
-  const { isDarkMode, updateDarkMode, userId, updateUserData, orderTrigger } =
-    useStore();
+  const {
+    isDarkMode,
+    updateDarkMode,
+    userId,
+    updateUserData,
+    orderTrigger,
+    deleteAllCartItem,
+  } = useStore();
 
   useEffect(() => {
     fetchUserData();
@@ -66,6 +72,7 @@ const index = () => {
     }
 
     setLoading(false);
+    deleteAllCartItem();
     router.replace("/signIn");
   };
 
