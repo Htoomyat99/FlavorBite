@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useRouter } from "expo-router";
 import { View } from "react-native";
 import { useTheme } from "react-native-paper";
@@ -8,24 +8,23 @@ import { useStore } from "@/src/store/store";
 import SignInScreen from "@/src/screens/auth/signIn/SignInScreen";
 import ErrorAlertModal from "@/src/modal/ErrorAlertModal";
 import LoadingModal from "@/src/modal/LoadingModal";
+import useGoogleSignIn from "@/src/hooks/useGoogleSignIn";
 
 const login = () => {
   const router = useRouter();
   const theme = useTheme();
 
+  const { signInWithGoogle, errVisible, setErrVisible, loading, setLoading } =
+    useGoogleSignIn();
+
   const { updateUserId } = useStore();
-  const [loading, setLoading] = useState(false);
-  const [errVisible, setErrVisible] = useState({ status: false, message: "" });
 
   const goSignUpAction = () => {
     router.push("/signUp");
   };
 
   const forgotPassAction = () => {
-    router.push("/resetPassword");
-  };
-
-  const signInWithGoogleAction = () => {
+    // router.push("/resetPassword");
     setErrVisible({ status: true, message: "Not implemented yet" });
   };
 
@@ -56,7 +55,7 @@ const login = () => {
         goSignUpAction={goSignUpAction}
         signInAction={signInAction}
         forgotPassAction={forgotPassAction}
-        signInWithGoogleAction={signInWithGoogleAction}
+        signInWithGoogleAction={signInWithGoogle}
       />
 
       <ErrorAlertModal

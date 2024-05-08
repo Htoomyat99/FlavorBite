@@ -1,0 +1,7 @@
+<resources>
+  <string name="app_name">FlavorBite</string>
+  <string name="expo_splash_screen_resize_mode" translatable="false">contain</string>
+  <string name="expo_splash_screen_status_bar_translucent" translatable="false">false</string>
+  <string name="expo_system_ui_user_interface_style" translatable="false">automatic</string>
+  <string name="sever_client_id">516212627067-kibd01rnglpf7gc5dvhai7l5c9eglcau.apps.googleusercontent.com</string>
+</resources>

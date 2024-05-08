@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useTheme } from "react-native-paper";
 import { useRouter } from "expo-router";
 
-import useInternetConnection from "@/src/hooks/useInternetLocation";
+import useInternetConnection from "@/src/hooks/useInternetConnection";
 import { useStore } from "@/src/store/store";
 import LanguageModal from "@/src/modal/LanguageModal";
 import { signOutWithEmail } from "@/domain/auth/sign_out_with_email";
@@ -14,6 +14,7 @@ import LoadingModal from "@/src/modal/LoadingModal";
 import ErrorAlertModal from "@/src/modal/ErrorAlertModal";
 import { useLocale } from "@/src/hooks/useLocale";
 import { getUserData } from "@/domain/dashboard/get_user_data";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 const index = () => {
   const router = useRouter();
@@ -61,6 +62,14 @@ const index = () => {
     updateDarkMode(!isDarkMode);
   };
 
+  const googleSignOut = async () => {
+    try {
+      await GoogleSignin.signOut();
+    } catch (error: any) {
+      setErrVisible({ status: true, message: error?.message });
+    }
+  };
+
   const signOutAction = async () => {
     setLoading(true);
 
@@ -71,6 +80,7 @@ const index = () => {
       return;
     }
 
+    await googleSignOut();
     setLoading(false);
     deleteAllCartItem();
     router.replace("/signIn");

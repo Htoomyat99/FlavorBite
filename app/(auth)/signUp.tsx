@@ -8,21 +8,19 @@ import { useStore } from "@/src/store/store";
 import SignUpScreen from "@/src/screens/auth/signUp/SignUpScreen";
 import ErrorAlertModal from "@/src/modal/ErrorAlertModal";
 import LoadingModal from "@/src/modal/LoadingModal";
+import useGoogleSignIn from "@/src/hooks/useGoogleSignIn";
 
 const signUp = () => {
   const router = useRouter();
   const theme = useTheme();
 
+  const { signInWithGoogle, errVisible, setErrVisible, loading, setLoading } =
+    useGoogleSignIn();
+
   const { updateUserId } = useStore();
-  const [loading, setLoading] = useState(false);
-  const [errVisible, setErrVisible] = useState({ status: false, message: "" });
 
   const goSignInAction = () => {
     router.push("/signIn");
-  };
-
-  const signInWithGoogleAction = () => {
-    setErrVisible({ status: true, message: "Not implemented yet" });
   };
 
   const signUpAction = async (formData: {
@@ -60,7 +58,7 @@ const signUp = () => {
       <SignUpScreen
         goSignInAction={goSignInAction}
         signUpAction={signUpAction}
-        signInWithGoogleAction={signInWithGoogleAction}
+        signInWithGoogleAction={signInWithGoogle}
       />
 
       <ErrorAlertModal

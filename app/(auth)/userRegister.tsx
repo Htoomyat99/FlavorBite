@@ -71,7 +71,7 @@ const userRegister = () => {
           newPhoto = await manipulateAsync(
             newPhoto.localUri || newPhoto.uri,
             [{ rotate: 180 }, { flip: FlipType.Vertical }],
-            { compress: 1, format: SaveFormat.PNG }
+            { compress: 1, format: SaveFormat.JPEG }
           );
         }
         setPhoto(newPhoto.uri);

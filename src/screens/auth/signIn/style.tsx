@@ -29,6 +29,10 @@ const styles = StyleSheet.create({
     fontSize: hp(1.6),
     textAlign: "right",
     fontWeight: "bold",
+    width: wp(30),
+    alignSelf: "flex-end",
+    marginTop: -hp(1),
+    paddingVertical: hp(0.5),
   },
   signUpbtn: {
     paddingVertical: hp(0.2),

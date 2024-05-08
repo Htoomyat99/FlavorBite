@@ -22,11 +22,6 @@ const _layout = () => {
   const currentSession = async () => {
     router.replace("/splash");
 
-    if (resetPass) {
-      router.replace("/setNewPassword");
-      return;
-    }
-
     const { data, error } = await getCurrentSession();
     if (error) {
       Alert.alert(error.name, error.message);

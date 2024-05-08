@@ -1,7 +1,7 @@
 import { RefreshControl, StyleSheet, View } from "react-native";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTheme } from "react-native-paper";
-import useInternetConnection from "@/src/hooks/useInternetLocation";
+import useInternetConnection from "@/src/hooks/useInternetConnection";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useRouter } from "expo-router";
 import { FlashList } from "@shopify/flash-list";

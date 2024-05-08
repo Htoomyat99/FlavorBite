@@ -20,7 +20,8 @@
       "infoPlist": {
         "NSPhotoLibraryUsageDescription": "Allow $(PRODUCT_NAME) to access your photos.",
         "NSPhotoLibraryAddUsageDescription": "Allow $(PRODUCT_NAME) to save photos."
-      }
+      },
+      "bundleIdentifier": "com.htoomyat992.FlavorBite"
     },
     "android": {
       "adaptiveIcon": {
@@ -63,6 +64,12 @@
         "expo-image-picker",
         {
           "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ],
+      [
+        "@react-native-google-signin/google-signin",
+        {
+          "iosUrlScheme": "com.googleusercontent.apps._some_id_here_"
         }
       ]
     ],
