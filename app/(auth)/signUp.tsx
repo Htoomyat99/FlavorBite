@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useRouter } from "expo-router";
 import { View } from "react-native";
 import { useTheme } from "react-native-paper";

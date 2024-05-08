@@ -103,6 +103,9 @@ export default {
   newPassAndConfirmPassNotMatch:
     "New password and confirm password do not match",
   updateProfileSuccess: "Update Profile Successfully",
+  updatePassword: "Update Password",
+  success: "Success",
+  checkEmail: "Check your email for the link to reset your password.",
 
   //errorModal
   error: "Error",

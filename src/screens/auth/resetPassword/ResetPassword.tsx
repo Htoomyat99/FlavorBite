@@ -5,16 +5,18 @@ import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { FormBuilder } from "react-native-paper-form-builder";
 import { useForm } from "react-hook-form";
 
-import { useLocale } from "@/src/hooks/useLocale";
 import styles from "./style";
+import { useLocale } from "@/src/hooks/useLocale";
 import { getForgotFormArray } from "../AuthData";
 
 const ResetPassword = ({
-  forgotPassAction,
+  resetPassAction,
   backAction,
+  disable,
 }: {
-  forgotPassAction: (data: { email: string }) => void;
+  resetPassAction: (data: { email: string }) => void;
   backAction: () => void;
+  disable: boolean;
 }) => {
   const theme = useTheme();
   const locale = useLocale();
@@ -56,8 +58,9 @@ const ResetPassword = ({
 
         <Button
           style={styles.btnContainer}
+          disabled={disable}
           mode="contained"
-          onPress={handleSubmit(forgotPassAction)}
+          onPress={handleSubmit(resetPassAction)}
         >
           {locale.resetPassword}
         </Button>

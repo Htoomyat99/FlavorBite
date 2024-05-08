@@ -102,6 +102,10 @@ export default {
   passChangeSuccess: "စကားဝှက်ကို အောင်မြင်စွာ ပြောင်းလဲခဲ့သည်",
   newPassAndConfirmPassNotMatch: "စကားဝှက်အသစ်နှင့် အတည်ပြုစကားဝှက် မတူညီပါ",
   updateProfileSuccess: "ပရိုဖိုင်ကို အောင်မြင်စွာ အပ်ဒိတ်လုပ်လိုက်ပါသည်",
+  updatePassword: "စကားဝှက် ပြောင်းလဲမည်",
+  success: "အောင်မြင်ပါသည်",
+  checkEmail:
+    "သင့်စကားဝှက်ကို ပြန်လည်သတ်မှတ်ရန် လင့်ခ်အတွက် သင့်အီးမေးလ်ကို စစ်ဆေးပါ။",
 
   //errorModal
   error: "အမှား",

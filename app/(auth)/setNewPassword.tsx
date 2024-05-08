@@ -11,10 +11,9 @@ import { useTheme } from "react-native-paper";
 import ErrorAlertModal from "@/src/modal/ErrorAlertModal";
 import LoadingModal from "@/src/modal/LoadingModal";
 import { useLocale } from "@/src/hooks/useLocale";
-import { changeUserPassword } from "@/domain/auth/change_password";
 import { useStore } from "@/src/store/store";
-import { supabase } from "@/utils/supabase/supabase";
 import SetNewPassword from "@/src/screens/auth/setNewPassword/SetNewPassword";
+import { updateUserInfo } from "@/domain/auth/change_password";
 
 const resetPassword = () => {
   const locale = useLocale();
@@ -25,7 +24,7 @@ const resetPassword = () => {
   const [loading, setLoading] = useState(false);
   const [errVisible, setErrVisible] = useState({ status: false, message: "" });
 
-  const resetPasswordAction = async (formData: {
+  const setNewPassAction = async (formData: {
     newPassword: string;
     confirmPassword: string;
   }) => {
@@ -34,20 +33,9 @@ const resetPassword = () => {
       setErrVisible({ status: true, message: locale.passwordNotMatch });
       return;
     }
+
     setLoading(true);
-
-    supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log(event, session);
-      if (event == "PASSWORD_RECOVERY") {
-      }
-    });
-
-    setLoading(false);
-
-    const { data, error } = await changeUserPassword(
-      "htoomyat.20399@gmail.com",
-      formData.newPassword
-    );
+    const { data, error } = await updateUserInfo(formData.newPassword);
 
     if (error) {
       setErrVisible({ status: true, message: error.message });
@@ -55,16 +43,15 @@ const resetPassword = () => {
       return;
     }
 
-    router.replace("/signIn");
-    updateResetPass(false);
     setLoading(false);
     ToastAndroid.show(locale.resetPasswordSuccess, ToastAndroid.SHORT);
+    router.push("/home/");
   };
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={{ flex: 1, backgroundColor: theme.colors.elevation.level1 }}>
-        <SetNewPassword resetPasswordAction={resetPasswordAction} />
+        <SetNewPassword setNewPassAction={setNewPassAction} />
 
         <ErrorAlertModal
           errVisible={errVisible}

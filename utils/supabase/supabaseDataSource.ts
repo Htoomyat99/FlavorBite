@@ -217,3 +217,21 @@ export const getAllDataByFilter = async (
     error: error,
   };
 };
+
+export const changeUserInfo = async (newPassword: string) => {
+  const { data, error } = await supabase.auth.updateUser({
+    password: newPassword,
+  });
+
+  if (error) {
+    return {
+      error: error,
+      data: data,
+    };
+  }
+
+  return {
+    data: data,
+    error: error,
+  };
+};

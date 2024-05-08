@@ -10,9 +10,9 @@ import { getResetFormArray } from "../AuthData";
 import { useLocale } from "@/src/hooks/useLocale";
 
 const SetNewPassword = ({
-  resetPasswordAction,
+  setNewPassAction,
 }: {
-  resetPasswordAction: (data: {
+  setNewPassAction: (data: {
     newPassword: string;
     confirmPassword: string;
   }) => void;
@@ -32,7 +32,7 @@ const SetNewPassword = ({
         style={{ backgroundColor: theme.colors.elevation.level2 }}
       >
         <Appbar.Content
-          title="Reset Password"
+          title="Set New Password"
           titleStyle={{ fontSize: hp(2.5) }}
         />
       </Appbar.Header>
@@ -57,9 +57,9 @@ const SetNewPassword = ({
       <Button
         style={styles.btnContainer}
         mode="contained"
-        onPress={handleSubmit(resetPasswordAction)}
+        onPress={handleSubmit(setNewPassAction)}
       >
-        {locale.resetPassword}
+        {locale.updatePassword}
       </Button>
     </View>
   );

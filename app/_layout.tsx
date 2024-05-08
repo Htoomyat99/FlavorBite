@@ -17,6 +17,7 @@ const _layout = () => {
 
   useEffect(() => {
     currentSession();
+    // router.replace("/signIn");
   }, []);
 
   const currentSession = async () => {

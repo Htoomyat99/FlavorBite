@@ -24,8 +24,7 @@ const login = () => {
   };
 
   const forgotPassAction = () => {
-    // router.push("/resetPassword");
-    setErrVisible({ status: true, message: "Not implemented yet" });
+    router.push("/resetPassword");
   };
 
   const signInAction = async (userData: {
