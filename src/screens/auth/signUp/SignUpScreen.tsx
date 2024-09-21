@@ -58,14 +58,16 @@ const SignUpScreen = (props: Props) => {
               locale.confirmPassRequired,
               passSecure,
               confirmPassSecure,
-              <TextInput.Icon
-                onPress={() => setPassSecure(!passSecure)}
-                icon={passSecure ? "eye-off" : "eye"}
-              />,
-              <TextInput.Icon
-                onPress={() => setConfirmPassSecure(!confirmPassSecure)}
-                icon={confirmPassSecure ? "eye-off" : "eye"}
-              />
+              <Text>hello</Text>,
+              <Text>Hello</Text>
+              // <TextInput.Icon
+              //   onPress={() => setPassSecure(!passSecure)}
+              //   icon={passSecure ? "eye-off" : "eye"}
+              // />,
+              // <TextInput.Icon
+              //   onPress={() => setConfirmPassSecure(!confirmPassSecure)}
+              //   icon={confirmPassSecure ? "eye-off" : "eye"}
+              // />
             )}
           />
         </View>

@@ -14,7 +14,7 @@ import LoadingModal from "@/src/modal/LoadingModal";
 import ErrorAlertModal from "@/src/modal/ErrorAlertModal";
 import { useLocale } from "@/src/hooks/useLocale";
 import { getUserData } from "@/domain/dashboard/get_user_data";
-import { GoogleSignin } from "@react-native-google-signin/google-signin";
+// import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 const index = () => {
   const router = useRouter();
@@ -62,13 +62,13 @@ const index = () => {
     updateDarkMode(!isDarkMode);
   };
 
-  const googleSignOut = async () => {
-    try {
-      await GoogleSignin.signOut();
-    } catch (error: any) {
-      setErrVisible({ status: true, message: error?.message });
-    }
-  };
+  // const googleSignOut = async () => {
+  //   try {
+  //     await GoogleSignin.signOut();
+  //   } catch (error: any) {
+  //     setErrVisible({ status: true, message: error?.message });
+  //   }
+  // };
 
   const signOutAction = async () => {
     setLoading(true);
@@ -80,7 +80,7 @@ const index = () => {
       return;
     }
 
-    await googleSignOut();
+    // await googleSignOut();
     setLoading(false);
     deleteAllCartItem();
     router.replace("/signIn");

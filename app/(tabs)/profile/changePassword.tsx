@@ -11,7 +11,7 @@ import { useTheme } from "react-native-paper";
 import ChangePassword from "@/src/screens/dashboard/changePassword/ChangePassword";
 import LoadingModal from "@/src/modal/LoadingModal";
 import ErrorAlertModal from "@/src/modal/ErrorAlertModal";
-import { changeUserPassword } from "@/domain/auth/change_password";
+// import { changeUserPassword } from "@/domain/auth/change_password";
 import { useLocale } from "@/src/hooks/useLocale";
 
 const changePassword = () => {
@@ -36,13 +36,13 @@ const changePassword = () => {
     }
 
     setLoading(true);
-    const { data, error } = await changeUserPassword(formData.newPassword);
+    // const { data, error } = await changeUserPassword(formData.newPassword);
 
-    if (error) {
-      setErrVisible({ status: true, message: error.message });
-      setLoading(false);
-      return;
-    }
+    // if (error) {
+    //   setErrVisible({ status: true, message: error.message });
+    //   setLoading(false);
+    //   return;
+    // }
 
     setLoading(false);
     ToastAndroid.show(locale.passChangeSuccess, ToastAndroid.SHORT);

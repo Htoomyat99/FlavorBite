@@ -29,7 +29,7 @@ const _layout = () => {
         tabBarStyle: {
           backgroundColor: theme.colors.background,
           display: hide ? "none" : "flex",
-          height: hp(7),
+          height: hp(10),
         },
       }}
     >

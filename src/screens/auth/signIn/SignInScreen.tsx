@@ -42,20 +42,21 @@ const SignInScreen = (props: Props) => {
               locale.pass,
               locale.passRequired,
               passSecure,
-              <TextInput.Icon
-                onPress={() => setPassSecure(!passSecure)}
-                icon={passSecure ? "eye-off" : "eye"}
-              />
+              // <TextInput.Icon
+              //   onPress={() => setPassSecure(!passSecure)}
+              //   icon={passSecure ? "eye-off" : "eye"}
+              // />
+              <Text>hello</Text>
             )}
           />
         </View>
 
-        <Text
+        {/* <Text
           onPress={props.forgotPassAction}
           style={[styles.forgotPass, { color: theme.colors.primary }]}
         >
           {locale.forgotPass}
-        </Text>
+        </Text> */}
 
         <Button
           onPress={handleSubmit(props.signInAction)}
