@@ -1,4 +1,4 @@
-import { ScrollView, TouchableOpacity, View } from "react-native";
+import { Pressable, ScrollView, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 import { Button, Text, TextInput, useTheme } from "react-native-paper";
 import { FormBuilder } from "react-native-paper-form-builder";
@@ -58,38 +58,36 @@ const SignUpScreen = (props: Props) => {
               locale.confirmPassRequired,
               passSecure,
               confirmPassSecure,
-              <Text>hello</Text>,
-              <Text>Hello</Text>
-              // <TextInput.Icon
-              //   onPress={() => setPassSecure(!passSecure)}
-              //   icon={passSecure ? "eye-off" : "eye"}
-              // />,
-              // <TextInput.Icon
-              //   onPress={() => setConfirmPassSecure(!confirmPassSecure)}
-              //   icon={confirmPassSecure ? "eye-off" : "eye"}
-              // />
+              <TextInput.Icon
+                onPress={() => setPassSecure(!passSecure)}
+                icon={passSecure ? "eye-off" : "eye"}
+              />,
+              <TextInput.Icon
+                onPress={() => setConfirmPassSecure(!confirmPassSecure)}
+                icon={confirmPassSecure ? "eye-off" : "eye"}
+              />
             )}
           />
         </View>
 
-        <Button
+        <Pressable
           onPress={handleSubmit(props.signUpAction)}
-          style={styles.signUpbtn}
-          mode="contained"
+          style={{ ...styles.signUpbtn, backgroundColor: theme.colors.primary }}
         >
-          {locale.signUpBtnText}
-        </Button>
+          <Text style={{ ...styles.btnText, color: theme.colors.onPrimary }}>
+            {locale.signUpBtnText}
+          </Text>
+        </Pressable>
 
         <Text style={styles.continueText}>{locale.continueWith}</Text>
 
-        <Button
-          onPress={props.signInWithGoogleAction}
-          style={styles.btnContainer}
-          icon={"google"}
-          mode="contained"
+        <Pressable
+          style={{ ...styles.signUpbtn, backgroundColor: theme.colors.primary }}
         >
-          {locale.signInWithGoogle}
-        </Button>
+          <Text style={{ ...styles.btnText, color: theme.colors.onPrimary }}>
+            {locale.signInWithGoogle}
+          </Text>
+        </Pressable>
 
         <TouchableOpacity
           style={styles.footerContainer}

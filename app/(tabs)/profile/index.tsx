@@ -83,7 +83,7 @@ const index = () => {
     // await googleSignOut();
     setLoading(false);
     deleteAllCartItem();
-    router.replace("/signIn");
+    router.replace("/(auth)");
   };
 
   const hideModal = () => {

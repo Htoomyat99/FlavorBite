@@ -1,3 +1,4 @@
+import { Colors } from "@/constants/Colors";
 import { StyleSheet } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -13,13 +14,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: wp(7),
   },
   welcomeText: {
-    fontSize: hp(5),
+    fontSize: hp(4),
     marginBottom: hp(0.5),
   },
   para: {
-    fontSize: hp(1.8),
-    lineHeight: hp(2.5),
-    letterSpacing: wp(0.5),
+    fontSize: hp(1.6),
+    lineHeight: hp(3),
+    letterSpacing: wp(0.3),
   },
   formBuilderContainer: {
     marginTop: hp(5),
@@ -35,11 +36,17 @@ const styles = StyleSheet.create({
     paddingVertical: hp(0.5),
   },
   signUpbtn: {
-    paddingVertical: hp(0.2),
+    height: hp(5.5),
     marginTop: hp(5),
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: wp(7),
+  },
+  btnText: {
+    fontSize: hp(1.6),
   },
   continueText: {
-    fontSize: hp(1.8),
+    fontSize: hp(1.6),
     marginTop: hp(5),
     textAlign: "center",
   },

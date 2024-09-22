@@ -17,21 +17,19 @@ const _layout = () => {
 
   useEffect(() => {
     currentSession();
-    // router.replace("/signIn");
+    // router.replace("/(auth)");
   }, []);
 
   const currentSession = async () => {
-    router.replace("/splash");
-
     const { data, error } = await getCurrentSession();
     if (error) {
       Alert.alert(error.name, error.message);
-      router.replace("/signIn");
+      router.replace("/(auth)");
       return;
     }
 
     if (data.session === null) {
-      router.replace("/signIn");
+      router.replace("/(auth)");
       return;
     }
 
@@ -56,6 +54,7 @@ const _layout = () => {
       <PaperProvider theme={theme}>
         <BottomSheetModalProvider>
           <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="index" />
             <Stack.Screen name="(auth)" />
             <Stack.Screen name="(tabs)" />
           </Stack>

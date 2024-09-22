@@ -20,7 +20,7 @@ const signUp = () => {
   const { updateUserId } = useStore();
 
   const goSignInAction = () => {
-    router.push("/signIn");
+    router.navigate("/(auth)");
   };
 
   const signUpAction = async (formData: {
@@ -47,7 +47,7 @@ const signUp = () => {
 
     setLoading(false);
     updateUserId(data?.user?.id);
-    router.push({
+    router.navigate({
       pathname: "/userRegister",
       params: { email: data?.user?.email as string },
     });

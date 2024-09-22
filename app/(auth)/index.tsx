@@ -43,7 +43,7 @@ const login = () => {
       return;
     }
 
-    router.replace("/(tabs)/home");
+    router.navigate("/(tabs)/home");
     updateUserId(data?.user.id);
     setLoading(false);
   };

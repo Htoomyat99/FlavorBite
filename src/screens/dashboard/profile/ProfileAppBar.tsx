@@ -15,7 +15,7 @@ const ProfileAppBar = () => {
     >
       <Appbar.Content
         title={locale.profile}
-        titleStyle={{ fontSize: hp(2.5) }}
+        titleStyle={{ fontSize: hp(2.2), lineHeight: hp(5) }}
       />
     </Appbar.Header>
   );

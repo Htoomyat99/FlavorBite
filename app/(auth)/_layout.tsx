@@ -1,12 +1,10 @@
-import React from "react";
 import { Stack } from "expo-router";
+import React from "react";
 
-const _layout = () => {
+const AuthLayout = () => {
   return (
     <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="splash" />
-      <Stack.Screen name="onboarding" />
-      <Stack.Screen name="signIn" />
+      <Stack.Screen name="index" />
       <Stack.Screen name="signUp" />
       <Stack.Screen name="resetPassword" />
       <Stack.Screen name="setNewPassword" />
@@ -15,4 +13,4 @@ const _layout = () => {
   );
 };
 
-export default _layout;
+export default AuthLayout;

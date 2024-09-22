@@ -60,9 +60,7 @@ const ProfileScreen = (props: Props) => {
       <View style={styles.headerContainer}>
         <Image
           source={{
-            uri: props.userData?.photo
-              ? props.userData.photo
-              : "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+            uri: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
           }}
           style={[styles.image, { backgroundColor: theme.colors.background }]}
         />

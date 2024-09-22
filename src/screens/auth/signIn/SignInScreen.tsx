@@ -1,12 +1,13 @@
-import { ScrollView, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Pressable, ScrollView, TouchableOpacity, View } from "react-native";
 import { Button, Text, TextInput, useTheme } from "react-native-paper";
 import { FormBuilder } from "react-native-paper-form-builder";
-import { useForm } from "react-hook-form";
 
-import styles from "./style";
 import { useLocale } from "@/src/hooks/useLocale";
 import { getSignInFormArray } from "../AuthData";
+import styles from "./style";
+import { signInWithEmail } from "@/domain/auth/sign_in_with_email";
 
 interface Props {
   goSignUpAction: () => void;
@@ -42,11 +43,7 @@ const SignInScreen = (props: Props) => {
               locale.pass,
               locale.passRequired,
               passSecure,
-              // <TextInput.Icon
-              //   onPress={() => setPassSecure(!passSecure)}
-              //   icon={passSecure ? "eye-off" : "eye"}
-              // />
-              <Text>hello</Text>
+              <TextInput.Icon icon="eye" />
             )}
           />
         </View>
@@ -58,24 +55,24 @@ const SignInScreen = (props: Props) => {
           {locale.forgotPass}
         </Text> */}
 
-        <Button
+        <Pressable
           onPress={handleSubmit(props.signInAction)}
-          style={styles.signUpbtn}
-          mode="contained"
+          style={{ ...styles.signUpbtn, backgroundColor: theme.colors.primary }}
         >
-          {locale.signInBtnText}
-        </Button>
+          <Text style={{ ...styles.btnText, color: theme.colors.onPrimary }}>
+            {locale.signInBtnText}
+          </Text>
+        </Pressable>
 
         <Text style={styles.continueText}>{locale.continueWith}</Text>
 
-        <Button
-          onPress={props.signInWithGoogleAction}
-          style={styles.btnContainer}
-          icon={"google"}
-          mode="contained"
+        <Pressable
+          style={{ ...styles.signUpbtn, backgroundColor: theme.colors.primary }}
         >
-          {locale.signInWithGoogle}
-        </Button>
+          <Text style={{ ...styles.btnText, color: theme.colors.onPrimary }}>
+            {locale.signInWithGoogle}
+          </Text>
+        </Pressable>
 
         <TouchableOpacity
           style={styles.footerContainer}
