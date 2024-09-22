@@ -20,10 +20,10 @@ This project is a food ordering application built with React Native using Expo, 
 
 <p align="center">
   <img src="./assets/images/preview1.png" alt="Login Screen" width="160"/>
-  <img src="./assets/images/preview2.png" alt="Card List Screen" width="160"/>
-  <img src="./assets/images/preview3.png" alt="Filter and Search Screen" width="160"/>
-  <img src="./assets/images/preview4.png" alt="Card Detail Screen" width="160"/>
-  <img src="./assets/images/preview5.png" alt="Collections Screen" width="160"/>
+  <img src="./assets/images/preview2.png" alt="List Screen" width="160"/>
+  <img src="./assets/images/preview3.png" alt="Detail Screen" width="160"/>
+  <img src="./assets/images/preview4.png" alt="Cart Screen" width="160"/>
+  <img src="./assets/images/preview5.png" alt="Profile Screen" width="160"/>
 </p>
 
 ## 🔧 Tech Stack
@@ -52,28 +52,34 @@ This project is a food ordering application built with React Native using Expo, 
 ## 🛠️ Installation
 
 1. Clone the repository:
-   
+
    ```bash
    git clone https://github.com/your-repo/food-ordering-app.git
    cd food-ordering-app
-3. Install dependencies:
-   
+   ```
+
+2. Install dependencies:
+
    ```bash
    npm install
-4. Set up Supabase:
-   
+   ```
+
+3. Set up Supabase:
+
    Create a project at supabase.com.
    Configure your Supabase keys for authentication and backend.
-   
-5. For iOS, generate native code and run the app:
-    ```bash
-    npx expo run:ios
-    ```
 
-6. For Android, generate native code and run the app:
-    ```bash
-    npx expo run:android
-    ```
+4. For iOS, generate native code and run the app:
+
+   ```bash
+   npx expo run:ios
+   ```
+
+5. For Android, generate native code and run the app:
+   ```bash
+   npx expo run:android
+   ```
+
 ## 📝 License
 
 This project is licensed under the MIT License.
